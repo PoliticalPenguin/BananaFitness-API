@@ -41,7 +41,6 @@ router.route('/signout')
     res.send("logged out", 401);
   });
 
-
 //Fitbit Oauth Routes
 router.route("/fitbit/authorize")
   .get(function (req, res) {
