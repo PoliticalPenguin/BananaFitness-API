@@ -2,10 +2,10 @@ var router = require('express').Router();
 var authenticator = require('../authenticator');
 var db = require('../models/index');
 
+//Fitbit API Clients
 var fitbitApiClient = require("fitbit-node"),
   client = new fitbitApiClient("02e31ec9a3edea9b7587189546963420", "dba81a2c03e8d54b816455d91c5e76ee");   //Refactor to not be hardcoded in the future
 var requestTokenSecrets = {};
-
 
 //Local Signin route
 router.route('/signin')
@@ -63,13 +63,13 @@ router.route("/fitbit/callback")
       var accessToken = results[0],
         accessTokenSecret = results[1],
         userId = results[2].encoded_user_id;
-      return client.get("/profile.json", accessToken, accessTokenSecret).then(function (results) {
-        var response = results[0];
-        res.send(response);
-      });
-    }, function (error) {
-      res.send(error);
-    });
+      
+      var credentials = {
+        fitbitToken : accessToken,
+        fitbitSecret : accessTokenSecret
+      };
+
+      res.cookie('fitbitAuth', credentials, { maxAge: 900000 });
 });
 
 
