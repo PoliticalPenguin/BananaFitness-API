@@ -82,13 +82,13 @@ router.route("/fitbit/callback")
 
 router.route('/fitbit/request/')
   .get(function(req, res) {
-    //res.send(req.cookies.fitbitAuth);
-    client.get('/profile.json', req.cookies.fitbitAuth.fitbitToken, req.cookies.fitbitAuth.fitbitSecret).then(function(results) {
+    res.send(req.cookies.fitbitAuth);
+    /*client.get('/profile.json', req.cookies.fitbitAuth.fitbitToken, req.cookies.fitbitAuth.fitbitSecret).then(function(results) {
       res.send(results);
     })
     .catch(function(err) {
       res.send('err'+JSON.stringify(err));
-    });
+    });*/
   });
 
 /*router.route("/fitbit/request")
