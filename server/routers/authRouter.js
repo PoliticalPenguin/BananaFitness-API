@@ -82,7 +82,7 @@ router.route("/fitbit/callback")
 
 router.route('/fitbit/request/')
   .get(function(req, res) {
-    //res.send(req.cookies.fitbitAuth);
+    res.send(req.cookies.fitbitAuth.fitbitToken);
     client.get('/profile.json', req.cookies.fitbitAuth.fitbitToken, req.cookies.fitbitAuth.fitbitSecret).then(function(results) {
       res.send(results);
     })
