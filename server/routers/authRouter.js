@@ -87,7 +87,8 @@ router.route("/fitbit/callback")
 });
 
 router.route("/fitbit/cookie")
-  .get(function (req, res) { 
+  .get(function (req, res) {
+    res.cookie('fitbitAuth', req.cookies); 
     res.send(200);
 });
 
