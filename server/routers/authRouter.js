@@ -54,6 +54,8 @@ router.route("/fitbit/authorize")
     });
 });
 
+var accessToken;
+var accessTokenSecret;
 router.route("/fitbit/callback")
   .get(function (req, res) {
     var token = req.query.oauth_token,
@@ -61,7 +63,7 @@ router.route("/fitbit/callback")
       verifier = req.query.oauth_verifier;
 
     client.getAccessToken(token, secret, verifier).then(function (results) {
-      var accessToken = results[0],
+      accessToken = results[0],
         accessTokenSecret = results[1],
         userId = results[2].encoded_user_id;
       
@@ -82,7 +84,7 @@ router.route("/fitbit/callback")
 
 router.route('/fitbit/request/')
   .get(function(req, res) {
-    res.send(req.cookies.fitbitAuth.fitbitSecret);
+    //res.send(req.cookies.fitbitAuth.fitbitSecret);
     client.get('/profile.json', req.cookies.fitbitAuth.fitbitToken, req.cookies.fitbitAuth.fitbitSecret).then(function(results) {
       res.send(results);
     })
