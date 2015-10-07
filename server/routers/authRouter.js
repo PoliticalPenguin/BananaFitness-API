@@ -76,7 +76,7 @@ router.route('/fitbit/request/')
   .get(function(req, res) {
     var options = {
       hostname: 'api.fitbit.com',
-      path: '/1/user/-/activities/heart/date/today/1d.json',
+      // path: '/1/user/-/activities/heart/date/today/1d.json',
       method: 'GET',
       headers: {
         'Authorization': {name: 'Bearer', value: req.cookies.fitbitAccessToken}
