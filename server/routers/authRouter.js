@@ -82,17 +82,17 @@ router.route("/fitbit/callback")
 
 router.route("/fitbit/request")
   .get(function (req, res) {
-    return function() {
+    /*return function() {
       res.send("test");
-    });
+    });*/
     //res.send("Test");
-      /*return client.get("/profile.json", accessToken, accessTokenSecret).then(function (results) {
+      return client.get("/profile.json", accessToken, accessTokenSecret).then(function (results) {
               var response = results[0];              
               res.cookie('fitbitAuth', credentials, { maxAge: 900000 });
               res.send(response);
             });
       }, function (error) {
-          res.send(error);*/
+          res.send(error);
   });
     /*return client.get("/activities/heart/date/2015-10-06.json", req.cookies.fitbitAuth.fitBitToken, 
       req.cookies.fitbitAuth.fitBitSecret).then(function (results) {
