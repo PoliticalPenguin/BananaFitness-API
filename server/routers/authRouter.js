@@ -66,7 +66,7 @@ router.route("/fitbit/callback")
         fitbitAccessToken : token.access_token,
         fitbitRefreshToken : token.refresh_token
       };
-      loadedToken = credentials;
+      loadedToken = token;
       res.cookie('fitbitAuth', credentials, {maxAge: 900000});
       res.send(token);
   });
@@ -74,7 +74,7 @@ router.route("/fitbit/callback")
 
 router.route('/fitbit/request/')
   .get(function(req, res) {
-    console.log(req);
+    console.log(loadedToken);
     console.log(req.cookies);
     var options = {
       hostname: 'api.fitbit.com',
