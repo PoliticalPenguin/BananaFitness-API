@@ -90,7 +90,7 @@ router.route('/fitbit/request/')
               res.send(response);
             });*/
     //client.send(accessToken+','+req.cookies.fitbitAuth.fitbitToken+','+accessTokenSecret+','+req.cookies.fitbitAuth.fitbitSecret);
-    client.get('/profile.json',  req.cookies.fitbitAuth.fitbitToken, accessTokenSecret).then(function(results) {
+    client.get('/profile.json',  req.cookies.fitbitAuth.fitbitToken, req.cookies.fitbitAuth.fitbitSecret).then(function(results) {
       var response = results[0];
       res.send(response);
     })
