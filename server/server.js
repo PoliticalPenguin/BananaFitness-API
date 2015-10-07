@@ -88,7 +88,8 @@ app.use(function(req, res, next) {
     res.status(200);
     res.end();
   }
-  next();
+  else
+    next();
 });
 //Cookie parser
 app.use(cookieParser('keyboard cat'));
@@ -123,12 +124,12 @@ var movesRouter = require('./routers/movesRouter');
 var followsRouter = require('./routers/followsRouter');
 
 // All of our routes will console log a status
-app.use(function (req, res, next) {
-  console.log('==========================================');
-  console.log(req.method + ': ' + req.url);
-  console.log(req.session);
-  next();
-});
+// app.use(function (req, res, next) {
+//   console.log('==========================================');
+//   console.log(req.method + ': ' + req.url);
+//   console.log(req.session);
+//   next();
+// });
 
 // Ideally, this route sends the index.html
 app.get('/', function (req, res) {

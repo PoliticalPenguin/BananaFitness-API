@@ -42,10 +42,9 @@ router.route('/signout')
 
 //Fitbit Oauth Routes
 router.route("/fitbit/authorize")
-  .get(function(req, res) {
-    res.redirect('http://www.google.com');
-    //res.redirect("https://www.fitbit.com/oauth2/authorize?response_type=token&client_id=229WNK&scope=activity%20heartrate%20profile&expires_in=604800");
-  }
+  .get(function(req, res) 
+    res.redirect("https://www.fitbit.com/oauth2/authorize?response_type=token&client_id=229WNK&scope=activity%20heartrate%20profile&expires_in=604800");
+  });
   /*.get(function (req, res) {
     client.getRequestToken().then(function (results) {
       var token = results[0],
@@ -55,34 +54,35 @@ router.route("/fitbit/authorize")
     }, function (error) {
       res.send(error);
     });*/
-});
 
-var accessToken;
-var accessTokenSecret;
 router.route("/fitbit/callback")
   .get(function (req, res) {
-    var token = req.query.oauth_token,
-      secret = requestTokenSecrets[token],
-      verifier = req.query.oauth_verifier;
+    console.log(req);
+    res.send('okay');
+    // var token = req.query.oauth_token,
+    //   secret = requestTokenSecrets[token],
+    //   verifier = req.query.oauth_verifier;
 
-    client.getAccessToken(token, secret, verifier).then(function (results) {
-      accessToken = results[0],
-        accessTokenSecret = results[1],
-        userId = results[2].encoded_user_id;
+    // client.getAccessToken(token, secret, verifier).then(function (results) {
+    //   accessToken = results[0],
+    //     accessTokenSecret = results[1],
+    //     userId = results[2].encoded_user_id;
       
-      var credentials = {
-        fitbitToken : accessToken,
-        fitbitSecret : accessTokenSecret
-      };
+    //   var credentials = {
+    //     fitbitToken : accessToken,
+    //     fitbitSecret : accessTokenSecret
+    //   };
 
-      return client.get("/profile.json", accessToken, accessTokenSecret).then(function (results) {
-              var response = results[0];              
-              res.cookie('fitbitAuth', credentials, { maxAge: 900000 });
-              res.send(response);
-            });
-      }, function (error) {
-          res.send(error);
-    });
+    //   console.log(credentials);
+
+    //   return client.get("/profile.json", accessToken, accessTokenSecret).then(function (results) {
+    //           var response = results[0];              
+    //           res.cookie('fitbitAuth', credentials, { maxAge: 900000 });
+    //           res.send(response);
+    //         });
+    //   }, function (error) {
+    //       res.send(error);
+    // });
 });
 
 router.route('/fitbit/request/')
