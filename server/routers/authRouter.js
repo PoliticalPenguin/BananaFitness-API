@@ -42,14 +42,13 @@ router.route('/signout')
   });
 
 //Fitbit Oauth Routes
-router.route("/fitbit/authorize/:username")
+router.route("/fitbit/authorize")
   .get(function (req, res) {
     client.getRequestToken().then(function (results) {
       var token = results[0],
         secret = results[1];
       requestTokenSecrets[token] = secret;
-      res.redirect("http://www.fitbit.com/oauth/authorize?oauth_token=" + token 
-        + "&redirect_uri=https%3A%2F%2Fpenguin-banana-fitness-api.herokuapp.com%2Fauth%2Ffitbit%2Fcallback%2F" + req.params.username);
+      res.redirect("http://www.fitbit.com/oauth/authorize?oauth_token=" + token);
     }, function (error) {
       res.send(error);
     });
@@ -60,7 +59,7 @@ router.route("/fitbit/callback")
     var token = req.query.oauth_token,
       secret = requestTokenSecrets[token],
       verifier = req.query.oauth_verifier;
-
+      
     client.getAccessToken(token, secret, verifier).then(function (results) {
       var accessToken = results[0],
         accessTokenSecret = results[1],
