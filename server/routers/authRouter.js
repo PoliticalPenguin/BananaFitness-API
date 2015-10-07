@@ -60,14 +60,35 @@ router.route("/fitbit/callback")
   console.log('!!!!!!!!!!!!!!!!!!!!!!');
   client.getToken(code, redirect_uri)
     .then(function(token) {
-      // ... save your token on db or session... 
-      // then redirect
-        res.send('Token success!');
-        })
-        .catch(function(err) {
-              // something went wrong.
-          res.send(500, err);          
-        });
+      console.log(token);
+      res.send(token);
+    //   clientID: clientId,
+    // clientSecret: consumerSecret,
+    // site: config.FITBIT_BASE_API_URL_TOKEN,
+    // authorizationPath: config.FITBIT_AUTH_PATH,
+    // tokenPath: config.FITBIT_TOKEN_PATH,
+    // useBasicAuthorizationHeader: true
+     // var credentials = {
+     //    fitbitToken : accessToken,
+     //    fitbitSecret : accessTokenSecret
+     //  };
+
+     //        console.log(credentials);
+
+     //        return client.get("/profile.json", accessToken, accessTokenSecret).then(function (results) {
+     //                var response = results[0];              
+     //                res.cookie('fitbitAuth', credentials, { maxAge: 900000 });
+     //                res.send(response);
+     //              });
+     //        }, function (error) {
+     //            res.send(error);
+     //      });
+     //    })
+     //    .catch(function(err) {
+     //          // something went wrong.
+     //      res.send(500, err);          
+        // });
+  });
 });
 
 router.route('/fitbit/request/')
