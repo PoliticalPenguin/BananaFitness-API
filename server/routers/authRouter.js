@@ -44,7 +44,7 @@ router.route('/signout')
 router.route("/fitbit/authorize")
   .get(function(req, res) {
     res.redirect('http://www.google.com');
-    res.redirect("https://www.fitbit.com/oauth2/authorize?response_type=token&client_id=229WNK&scope=activity%20heartrate%20profile&expires_in=604800");
+    //res.redirect("https://www.fitbit.com/oauth2/authorize?response_type=token&client_id=229WNK&scope=activity%20heartrate%20profile&expires_in=604800");
   }
   /*.get(function (req, res) {
     client.getRequestToken().then(function (results) {
