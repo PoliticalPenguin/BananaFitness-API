@@ -61,20 +61,29 @@ router.route("/fitbit/callback")
   client.getToken(code, redirect_uri)
     .then(function(token) {
       console.log(token);
-      res.send(token);
       var credentials = {
         fitbitAccessToken : token.access_token,
         fitbitRefreshToken : token.refresh_token
       };
-
       res.cookie('fitbitAuth', credentials, {maxAge: 900000});
-      res.send('Logged into Fitbit');
+      res.send(token);
   });
 });
 
 router.route('/fitbit/request/')
   .get(function(req, res) {
-    https.get('https://api.fitbit.com/', function(fitbitRes) {
+    
+    console.log(req.cookies);
+    var options = {
+      hostname: 'api.fitbit.com',
+      path: '/1/user/-/activities/heart/date/today/1d.json',
+      headers: {
+        'Authorization': 'Bearer ' + req.cookies.fitbitAccessToken
+      }
+    };
+
+    https.get(options, function(fitbitRes) {
+      var body = '';
       fitbitRes.on('data', function (chunk) {
           body += chunk;
         });
@@ -85,14 +94,6 @@ router.route('/fitbit/request/')
     }).on('error', function(e) {
         console.error(e);
       });
-    // var options = {
-    //   hostname: 'api.fitbit.com',
-    //   // path: '/1/user/-/activities/heart/date/today/1d.json',
-    //   method: 'GET',
-    //   headers: {
-    //     'Authorization': {name: 'Bearer', value: req.cookies.fitbitAccessToken}
-    //   }
-    // };
 
     // https.request(options, function (fitbitRes) {
     //   var body = '';
