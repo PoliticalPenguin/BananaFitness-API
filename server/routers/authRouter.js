@@ -74,25 +74,36 @@ router.route("/fitbit/callback")
 
 router.route('/fitbit/request/')
   .get(function(req, res) {
-    var options = {
-      hostname: 'api.fitbit.com',
-      // path: '/1/user/-/activities/heart/date/today/1d.json',
-      method: 'GET',
-      headers: {
-        'Authorization': {name: 'Bearer', value: req.cookies.fitbitAccessToken}
-      }
-    };
-
-    https.request(options, function (fitbitRes) {
-      var body = '';
+    https.get('https://api.fitbit.com/', function(fitbitRes) {
       fitbitRes.on('data', function (chunk) {
           body += chunk;
         });
       fitbitRes.on('end', function() {
         console.log('Making https request!');
         res.send(body);  
-      })
-    });
+      });
+    }).on('error', function(e) {
+        console.error(e);
+      });
+    // var options = {
+    //   hostname: 'api.fitbit.com',
+    //   // path: '/1/user/-/activities/heart/date/today/1d.json',
+    //   method: 'GET',
+    //   headers: {
+    //     'Authorization': {name: 'Bearer', value: req.cookies.fitbitAccessToken}
+    //   }
+    // };
+
+    // https.request(options, function (fitbitRes) {
+    //   var body = '';
+    //   fitbitRes.on('data', function (chunk) {
+    //       body += chunk;
+    //     });
+    //   fitbitRes.on('end', function() {
+    //     console.log('Making https request!');
+    //     res.send(body);  
+    //   })
+    // });
   });
 
 module.exports = router;
