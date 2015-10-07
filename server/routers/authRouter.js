@@ -88,8 +88,8 @@ router.route("/fitbit/request")
       }); 
     }, function (error) {
       res.send(error);
-    });
 });
+
 
 
 

@@ -107,7 +107,7 @@ app.use(authenticator.initialize());
 app.use(authenticator.session());
 
 // Set our port
-var port = process.env.PORT || 8080;
+// var port = process.env.PORT || 8080;
 
 // ROUTES FOR OUR API
 // =============================================================================
@@ -134,7 +134,7 @@ app.use(function (req, res, next) {
 app.get('/', function (req, res) {
   // res.sendFile(__dirname + '/public/views/index.html');
   res.json({
-    message: 'Welcome to the Covalent Fitness API!'
+    message: 'Welcome to the Penguin Banana Fitness API!'
   });
 });
 

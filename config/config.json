@@ -15,7 +15,7 @@
     "dialect": "postgres"
   },
   "production": {
-    "database": "postgres://fkcuhrzleoygss:LuLQx0mqM6KIpqKleKrWn_YJyD@ec2-54-83-51-38.compute-1.amazonaws.com:5432/d2t4o2onu3ea5",
+    "database": "postgres://lavsrkyzytcnwv:KoIjN0AygMcigqoUNYo9hkYfr3@ec2-54-197-241-239.compute-1.amazonaws.com:5432/d3o1c9kpujnsir",
     "allowedOrigin": "http://localhost:8100"
   }
 }
