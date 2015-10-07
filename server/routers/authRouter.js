@@ -42,7 +42,7 @@ router.route('/signout')
 
 //Fitbit Oauth Routes
 router.route("/fitbit/authorize")
-  .get(function(req, res) 
+  .get(function (req, res) {
     res.redirect("https://www.fitbit.com/oauth2/authorize?response_type=token&client_id=229WNK&scope=activity%20heartrate%20profile&expires_in=604800");
   });
   /*.get(function (req, res) {
