@@ -10,6 +10,7 @@ var fitbitApiClient = require("fitbit-client-oauth2"),
 var redirect_uri = 'https://penguin-banana-fitness-api.herokuapp.com/auth/fitbit/callback';
 var scope =  [ 'activity', 'profile'];
 
+var loadedToken = {};
 
 //Local Signin route
 router.route('/signin')
@@ -65,6 +66,7 @@ router.route("/fitbit/callback")
         fitbitAccessToken : token.access_token,
         fitbitRefreshToken : token.refresh_token
       };
+      loadedToken = credentials;
       res.cookie('fitbitAuth', credentials, {maxAge: 900000});
       res.send(token);
   });
@@ -72,13 +74,13 @@ router.route("/fitbit/callback")
 
 router.route('/fitbit/request/')
   .get(function(req, res) {
-    
+    console.log(req);
     console.log(req.cookies);
     var options = {
       hostname: 'api.fitbit.com',
       path: '/1/user/-/activities/heart/date/today/1d.json',
       headers: {
-        'Authorization': 'Bearer ' + req.cookies.fitbitAccessToken
+        'Authorization': 'Bearer ' + loadedToken.fitbitAccessToken
       }
     };
 
@@ -94,17 +96,6 @@ router.route('/fitbit/request/')
     }).on('error', function(e) {
         console.error(e);
       });
-
-    // https.request(options, function (fitbitRes) {
-    //   var body = '';
-    //   fitbitRes.on('data', function (chunk) {
-    //       body += chunk;
-    //     });
-    //   fitbitRes.on('end', function() {
-    //     console.log('Making https request!');
-    //     res.send(body);  
-    //   })
-    // });
   });
 
 module.exports = router;
