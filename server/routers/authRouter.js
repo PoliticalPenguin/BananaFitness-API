@@ -61,7 +61,6 @@ router.route("/fitbit/callback")
   var code = req.query.code;
   client.getToken(code, redirect_uri)
     .then(function(token) {
-      console.log(token);
       var credentials = {
         fitbitAccessToken : token.access_token,
         fitbitRefreshToken : token.refresh_token
