@@ -73,7 +73,7 @@ router.route("/fitbit/callback")
 
 router.route('/fitbit/request/')
   .get(function(req, res) {
-    res.send(loadedToken);
+    res.send(req.cookies);
     // console.log(loadedToken);
     // console.log(req.cookies);
     // var options = {
