@@ -4,7 +4,11 @@ var db = require('../models/index');
 
 //Fitbit API Clients
 var fitbitApiClient = require("fitbit-client-oauth2"),
-  client = new fitbitApiClient("02e31ec9a3edea9b7587189546963420", "dba81a2c03e8d54b816455d91c5e76ee");   //Refactor to not be hardcoded in the future
+  client = new fitbitApiClient("229WNK", "dba81a2c03e8d54b816455d91c5e76ee");   //Refactor to not be hardcoded in the future
+
+var redirect_uri = 'https://penguin-banana-fitness-api.herokuapp.com/auth/fitbit/callback';
+var scope =  [ 'activity', 'profile'];
+
 
 //Local Signin route
 router.route('/signin')
@@ -43,13 +47,27 @@ router.route('/signout')
 //Fitbit Oauth Routes
 router.route("/fitbit/authorize")
   .get(function (req, res) {
-    res.redirect("https://www.fitbit.com/oauth2/authorize?response_type=token&client_id=229WNK&scope=activity%20heartrate%20profile&expires_in=604800");
+    var authorization_uri = client.getAuthorizationUrl(redirect_uri, scope);
+    res.redirect(authorization_uri);
+    // res.redirect("https://www.fitbit.com/oauth2/authorize?response_type=token&client_id=229WNK&scope=activity%20heartrate%20profile&expires_in=604800");
+    // res.redirect("http://localhost:8080/auth/fitbit/callback#scope=heartrate+activity+profile+settings+nutrition+social+sleep+weight&user_id=3S2LJJ&token_type=Bearer&expires_in=603182&access_token=eyJhbGciOiJIUzI1NiJ9.eyJleHAiOjE0NDQ4NTM1MzQsInNjb3BlcyI6Indwcm8gd251dCB3c2xlIHdzZXQgd3dlaSB3aHIgd2FjdCB3c29jIiwic3ViIjoiM1MyTEpKIiwiYXVkIjoiMjI5V05LIiwiaXNzIjoiRml0Yml0IiwidHlwIjoiYWNjZXNzX3Rva2VuIiwiaWF0IjoxNDQ0MjUwMzUyfQ.ANYK1H1uiLtVqVJ0ACWzotBv6hwnNrgP34m6Uzlh3HA");
   });
 
 router.route("/fitbit/callback")
   .get(function (req, res) {
-    console.log(req);
-    res.json(req);
+  var code = req.query.code;
+  console.log(code);
+  console.log('!!!!!!!!!!!!!!!!!!!!!!');
+  client.getToken(code, redirect_uri)
+    .then(function(token) {
+      // ... save your token on db or session... 
+      // then redirect
+        res.send('Token success!');
+        })
+        .catch(function(err) {
+              // something went wrong.
+          res.send(500, err);          
+        });
 });
 
 router.route('/fitbit/request/')
