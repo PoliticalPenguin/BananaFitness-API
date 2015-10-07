@@ -85,12 +85,16 @@ router.route("/fitbit/callback")
 router.route('/fitbit/request/')
   .get(function(req, res) {
     //res.send(req.cookies.fitbitAuth.fitbitSecret);
-    client.get('/profile.json',  accessToken, accessTokenSecret).then(function(results) {
+    client.get("/profile.json", accessToken, accessTokenSecret).then(function (results) {
+              var response = results[0];              
+              res.send(response);
+            });
+    /*client.get('/profile.json',  accessToken, accessTokenSecret).then(function(results) {
       res.send(results);
     })
     .catch(function(err) {
       res.status(200).send(err);
-    });
+    });*/
   });
 
 /*router.route("/fitbit/request")
