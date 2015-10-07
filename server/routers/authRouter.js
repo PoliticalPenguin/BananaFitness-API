@@ -69,7 +69,10 @@ router.route("/fitbit/callback")
         fitbitSecret : accessTokenSecret
       };
 
-      res.cookie('fitbitAuth', credentials, { maxAge: 900000 });
+      res.send('ok', 200);
+
+      // res.cookie('fitbitAuth', credentials, { maxAge: 900000 });
+      // res.send('')
 });
 
 
