@@ -71,13 +71,7 @@ router.route("/fitbit/callback")
       };
 
       return client.get("/profile.json", accessToken, accessTokenSecret).then(function (results) {
-              var response = results[0];
-              res.set({"Access-Control-Allow-Origin" : '*',
-                "Access-Control-Allow-Credentials" : 'true',
-                "Access-Control-Allow-Methods" : 'GET, POST',
-                "Access-Control-Allow-Headers" : 'Content-Type, *'
-              });
-
+              var response = results[0];              
               res.cookie('fitbitAuth', credentials, { maxAge: 900000 });
               res.send(response);
             });
@@ -86,10 +80,9 @@ router.route("/fitbit/callback")
     });
 });
 
-router.route("/fitbit/cookie")
+router.route("/fitbit/request")
   .get(function (req, res) {
-    res.cookie('fitbitAuth', req.cookies); 
-    res.send(200);
+    res.send(req.cookies);
 });
 
 
