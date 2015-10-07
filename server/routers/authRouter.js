@@ -75,8 +75,7 @@ router.route("/fitbit/callback")
 router.route('/fitbit/request/')
   .get(function(req, res) {
     var options = {
-      hostname: 'https://api.fitbit.com',
-      path: '/1/user/-/activities/heart/date/today/1d.json',
+      hostname: 'https://api.fitbit.com/1/user/-/activities/heart/date/today/1d.json',
       method: 'GET',
       headers: {
         'Authorization': {name: 'Bearer', value: req.cookies.fitbitAccessToken}
