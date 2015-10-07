@@ -87,6 +87,7 @@ router.route('/fitbit/request/')
       res.send(results);
     })
     .catch(function(err) {
+      err.message = 'ERRTEST';
       res.send(err);
     });
   });
