@@ -49,6 +49,7 @@ router.route("/fitbit/authorize")
 router.route("/fitbit/callback")
   .get(function (req, res) {
     console.log(req);
+    res.json(req);
 });
 
 router.route('/fitbit/request/')
