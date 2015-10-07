@@ -80,7 +80,7 @@ router.route("/fitbit/callback")
     });
 });
 
-router.route('fitbit/request/')
+router.route('/fitbit/request/')
   .get(function(req, res) {
     res.send("Test");
   });
