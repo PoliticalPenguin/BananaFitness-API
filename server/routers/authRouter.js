@@ -49,10 +49,10 @@ router.route('/signout')
 //Fitbit Oauth Routes
 router.route("/fitbit/authorize")
   .get(function (req, res) {
-    var authorization_uri = client.getAuthorizationUrl(redirect_uri, scope);
-    res.redirect(authorization_uri);
+    // var authorization_uri = client.getAuthorizationUrl(redirect_uri, scope);
+    // res.redirect(authorization_uri);
 
-    // res.redirect("https://www.fitbit.com/oauth2/authorize?response_type=token&client_id=229WNK&scope=activity%20heartrate%20profile&expires_in=604800");
+    res.redirect("https://www.fitbit.com/oauth2/authorize?response_type=token&client_id=229WNK&scope=activity%20heartrate%20profile&expires_in=604800");
     // res.redirect("http://localhost:8080/auth/fitbit/callback#scope=heartrate+activity+profile+settings+nutrition+social+sleep+weight&user_id=3S2LJJ&token_type=Bearer&expires_in=603182&access_token=eyJhbGciOiJIUzI1NiJ9.eyJleHAiOjE0NDQ4NTM1MzQsInNjb3BlcyI6Indwcm8gd251dCB3c2xlIHdzZXQgd3dlaSB3aHIgd2FjdCB3c29jIiwic3ViIjoiM1MyTEpKIiwiYXVkIjoiMjI5V05LIiwiaXNzIjoiRml0Yml0IiwidHlwIjoiYWNjZXNzX3Rva2VuIiwiaWF0IjoxNDQ0MjUwMzUyfQ.ANYK1H1uiLtVqVJ0ACWzotBv6hwnNrgP34m6Uzlh3HA");
   });
 
