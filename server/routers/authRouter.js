@@ -3,9 +3,8 @@ var authenticator = require('../authenticator');
 var db = require('../models/index');
 
 //Fitbit API Clients
-var fitbitApiClient = require("fitbit-node"),
+var fitbitApiClient = require("fitbit-client-oauth2"),
   client = new fitbitApiClient("02e31ec9a3edea9b7587189546963420", "dba81a2c03e8d54b816455d91c5e76ee");   //Refactor to not be hardcoded in the future
-var requestTokenSecrets = {};
 
 //Local Signin route
 router.route('/signin')
@@ -43,7 +42,8 @@ router.route('/signout')
 
 //Fitbit Oauth Routes
 router.route("/fitbit/authorize")
-  .get(function (req, res) {
+  res.redirect("https://www.fitbit.com/oauth2/authorize?response_type=token&client_id=229WNK&scope=activity%20heartrate%20profile&expires_in=604800");
+  /*.get(function (req, res) {
     client.getRequestToken().then(function (results) {
       var token = results[0],
         secret = results[1];
@@ -51,7 +51,7 @@ router.route("/fitbit/authorize")
       res.redirect("http://www.fitbit.com/oauth/authorize?oauth_token=" + token);
     }, function (error) {
       res.send(error);
-    });
+    });*/
 });
 
 var accessToken;
