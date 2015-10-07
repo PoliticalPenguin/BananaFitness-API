@@ -84,9 +84,14 @@ router.route('/fitbit/request/')
     };
 
     https.request(options, function (fitbitRes) {
-      console.log('Making https request!');
-      console.log(fitbitRes);
-      res.send(fitbitRes);
+      var body = '';
+      fitbitRes.on('data', function (chunk) {
+          body += chunk;
+        });
+      fitbitRes.on('end', function() {
+        console.log('Making https request!');
+        res.send(body);  
+      })
     });
   });
 
