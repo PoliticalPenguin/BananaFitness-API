@@ -85,6 +85,9 @@ router.route('/fitbit/request/')
     //res.send(req.cookies.fitbitAuth.fitbitToken);
     client.get('/profile.json', req.cookies.fitbitAuth.fitbitToken, req.cookies.fitbitAuth.fitbitSecret).then(function(results) {
       res.send(results);
+    })
+    .catch(function(err) {
+      res.send(err);
     });
   });
 
