@@ -82,7 +82,13 @@ router.route("/fitbit/callback")
 
 router.route("/fitbit/request")
   .get(function (req, res) {
-    res.send(req.cookies);
+    return client.get("/activities/heart/date/2015-10-06.json", req.cookies.fitbitAuth.fitBitToken, 
+      req.cookies.fitbitAuth.fitBitSecret).then(function (results) {
+        res.send(results);
+      }); 
+    }, function (error) {
+      res.send(error);
+    });
 });
 
 
