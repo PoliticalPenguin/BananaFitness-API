@@ -79,7 +79,7 @@ router.route('/fitbit/request/')
       hostname: 'api.fitbit.com',
       path: '/1/user/-/activities/heart/date/today/1d.json',
       headers: {
-        'Authorization': 'Bearer ' + loadedToken.fitbitAccessToken
+        'Authorization': 'Bearer ' + loadedToken.access_token
       }
     };
 
