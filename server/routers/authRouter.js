@@ -72,6 +72,12 @@ router.route("/fitbit/callback")
 
       return client.get("/profile.json", accessToken, accessTokenSecret).then(function (results) {
               var response = results[0];
+              res.set({"Access-Control-Allow-Origin" : '*',
+                "Access-Control-Allow-Credentials" : 'true',
+                "Access-Control-Allow-Methods" : 'GET, POST',
+                "Access-Control-Allow-Headers" : 'Content-Type, *'
+              });
+
               res.cookie('fitbitAuth', credentials, { maxAge: 900000 });
               res.send(response);
             });
