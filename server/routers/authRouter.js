@@ -1,3 +1,4 @@
+var querystring = require('querystring');
 var router = require('express').Router();
 var authenticator = require('../authenticator');
 var db = require('../models/index');
@@ -49,10 +50,10 @@ router.route('/signout')
 //Fitbit Oauth Routes
 router.route("/fitbit/authorize")
   .get(function (req, res) {
-    // var authorization_uri = client.getAuthorizationUrl(redirect_uri, scope);
-    // res.redirect(authorization_uri);
+    var authorization_uri = client.getAuthorizationUrl(redirect_uri, scope);
+    res.redirect(authorization_uri);
 
-    res.redirect("https://www.fitbit.com/oauth2/authorize?response_type=code&client_id=229WNK&scope=activity%20heartrate%20profile&expires_in=604800");
+    // res.redirect("https://www.fitbit.com/oauth2/authorize?response_type=token&client_id=229WNK&scope=activity%20heartrate%20profile&expires_in=604800");
     // res.redirect("http://localhost:8080/auth/fitbit/callback#scope=heartrate+activity+profile+settings+nutrition+social+sleep+weight&user_id=3S2LJJ&token_type=Bearer&expires_in=603182&access_token=eyJhbGciOiJIUzI1NiJ9.eyJleHAiOjE0NDQ4NTM1MzQsInNjb3BlcyI6Indwcm8gd251dCB3c2xlIHdzZXQgd3dlaSB3aHIgd2FjdCB3c29jIiwic3ViIjoiM1MyTEpKIiwiYXVkIjoiMjI5V05LIiwiaXNzIjoiRml0Yml0IiwidHlwIjoiYWNjZXNzX3Rva2VuIiwiaWF0IjoxNDQ0MjUwMzUyfQ.ANYK1H1uiLtVqVJ0ACWzotBv6hwnNrgP34m6Uzlh3HA");
   });
 
@@ -74,15 +75,25 @@ router.route("/fitbit/callback")
 router.route('/fitbit/activities')
   .post(function(req, res) {
     // Issue post request to fitbit api server
-    var options = {
+    var post_options = {
       hostname: 'api.fitbit.com',
-      path: '1/user/-/activities.json?startTime=12%3A20&durationMillis=600000&date=2015-03-01&distance=1.5',
+      path: '1/user/-/activities.json',
+        //?startTime=12%3A20&durationMillis=600000&date=2015-03-01&distance=1.5',
       method: 'POST',
       headers: {
-        'Authorization': 'Bearer ' + loadedToken.token.access_token
+        'Authorization': 'Bearer ' + loadedToken.token.access_token,
+        'Content-Type': 'application/x-www-form-urlencoded',
+        'Content-Length': post_data.length,
       }
     };
-    https.request(options, function(fitbitRes) {
+    var post_data = querystring.stringify({
+      'activityName': 'test',
+      'manualCalories': '100',
+      'startTime': '00:00:00',
+      'durationMillis': '1000',
+      'date': '2015-10-08'
+    });
+    var post_req = https.request(options, function(fitbitRes) {
       var body = '';
       fitbitRes.on('data', function(d) {
         body += data;
@@ -91,6 +102,9 @@ router.route('/fitbit/activities')
         res.send(body);
       });
     });
+
+    post_req.write(post_data);
+    post_req.end();
   }
   );
 
