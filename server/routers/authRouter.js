@@ -101,7 +101,7 @@ router.route('/fitbit/activities')
         res.send('data');
       });
       fitbitRes.on('end', function() {
-        res.send('end');
+        //res.send('end');
         //res.send(body);
       });
     });
