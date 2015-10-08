@@ -102,10 +102,9 @@ router.route('/fitbit/activities')
         res.send(body);
       });
     });
-    res.send('ok');
 
-    /*post_req.write(post_data);
-    post_req.end();*/
+    post_req.write(post_data);
+    post_req.end();
   }
   );
 
