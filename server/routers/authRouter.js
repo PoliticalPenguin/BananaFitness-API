@@ -77,11 +77,17 @@ router.route('/fitbit/activities')
     // Issue post request to fitbit api server
         //?startTime=12%3A20&durationMillis=600000&date=2015-03-01&distance=1.5',
     var post_data = querystring.stringify({
-      'activityName': 'test',
+      'activityId': 90009,
+      'startTime': '12:20',
+      'durationMills': 600000,
+      'date': '2015-10:07',
+      'distance': 2
+      /*'activityName': 'test',
       'manualCalories': '100',
       'startTime': '00:00:00',
       'durationMillis': '1000',
-      'date': '2015-10-08'
+      'date': '2015-10-08',
+      'distance': 1.5*/
     });
     var post_options = {
       hostname: 'api.fitbit.com',
