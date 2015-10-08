@@ -25,6 +25,12 @@ module.exports = function(sequelize, DataTypes) {
     },
     sets: {
       type: DataTypes.INTEGER
+    },
+    startTime: {
+      type: DataTypes.INTEGER
+    },
+    endTime: {
+      type: DataTypes.INTEGER
     }
   }, {
     tableName: 'move',
