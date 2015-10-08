@@ -71,6 +71,29 @@ router.route("/fitbit/callback")
   });
 });
 
+router.route('/fitbit/activities')
+  .post(function(req, res) {
+    // Issue post request to fitbit api server
+    var options = {
+      hostname: 'api.fitbit.com',
+      path: '1/user/-/activities.json?startTime=12%3A20&durationMillis=600000&date=2015-03-01&distance=1.5',
+      method: 'POST',
+      headers: {
+        'Authorization': 'Bearer ' + loadedToken.token.access_token
+      }
+    };
+    https.request(options, function(fitbitRes) {
+      var body = '';
+      fitbitRes.on('data', function(d) {
+        body += data;
+      });
+      fitbitRes.on('end', function() {
+        res.send(body);
+      });
+    });
+  }
+  );
+
 router.route('/fitbit/request/')
   .get(function(req, res) {
     var options = {
