@@ -100,8 +100,8 @@ router.route('/fitbit/activities')
         body += d;
         res.send('data');
       });
-      fitbitRes.on('end', function() {
-        //res.send('end');
+      fitbitRes.on('end', function(param) {
+        res.send(param);
         //res.send(body);
       });
     });
