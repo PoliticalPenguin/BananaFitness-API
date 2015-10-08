@@ -88,7 +88,7 @@ router.route('/fitbit/activities')
       path: '1/user/-/activities.json',
       method: 'POST',
       headers: {
-        //'Authorization': 'Bearer ' + loadedToken.token.access_token,
+        'Authorization': 'Bearer ' + loadedToken.token.access_token,
         'Content-Type': 'application/x-www-form-urlencoded',
         //'Content-Length': post_data.length
       }
