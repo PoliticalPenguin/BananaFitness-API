@@ -82,12 +82,6 @@ router.route('/fitbit/activities')
       'durationMills': 600000,
       'date': '2015-10:07',
       'distance': 2
-      /*'activityName': 'test',
-      'manualCalories': '100',
-      'startTime': '00:00:00',
-      'durationMillis': '1000',
-      'date': '2015-10-08',
-      'distance': 1.5*/
     });
     var post_options = {
       hostname: 'api.fitbit.com',
