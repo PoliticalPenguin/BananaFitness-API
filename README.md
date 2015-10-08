@@ -1,5 +1,5 @@
 # API Server
-- The API server is deployed on Heroku at <https://covalent-fitness-api.herokuapp.com>
+- The API server is deployed on Heroku at <https://penguin-banana-fitness-api.herokuapp.com>
 
 ## API Routes
 
