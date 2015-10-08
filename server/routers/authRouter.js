@@ -93,6 +93,7 @@ router.route('/fitbit/activities')
       'durationMillis': '1000',
       'date': '2015-10-08'
     });
+    res.send('ok');
     var post_req = https.request(options, function(fitbitRes) {
       var body = '';
       fitbitRes.on('data', function(d) {
@@ -102,7 +103,6 @@ router.route('/fitbit/activities')
         //res.send(body);
       });
     });
-    res.send('ok');
 
     post_req.write(post_data);
     post_req.end();
