@@ -96,7 +96,7 @@ router.route('/fitbit/activities')
     var post_req = https.request(post_options, function(fitbitRes) {
       var body = '';
       fitbitRes.on('data', function(d) {
-        body += data;
+        body += d;
       });
       fitbitRes.on('end', function() {
         res.send(body);
