@@ -93,7 +93,7 @@ router.route('/fitbit/activities')
         'Content-Length': post_data.length
       }
     };
-    res.send('ok');
+    res.send(loadedToken.token.access_token);
     /*var post_req = https.request(options, function(fitbitRes) {
       var body = '';
       fitbitRes.on('data', function(d) {
