@@ -75,6 +75,7 @@ router.route("/fitbit/callback")
 router.route('/fitbit/activities')
   .get(function(req, res) {
     // Issue post request to fitbit api server
+    res.send('ok');
     var post_options = {
       hostname: 'api.fitbit.com',
       path: '1/user/-/activities.json',
@@ -93,7 +94,6 @@ router.route('/fitbit/activities')
       'durationMillis': '1000',
       'date': '2015-10-08'
     });
-    res.send('ok');
     var post_req = https.request(options, function(fitbitRes) {
       var body = '';
       fitbitRes.on('data', function(d) {
