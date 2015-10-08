@@ -75,18 +75,7 @@ router.route("/fitbit/callback")
 router.route('/fitbit/activities')
   .get(function(req, res) {
     // Issue post request to fitbit api server
-    var post_options = {
-      /*hostname: 'api.fitbit.com',
-      path: '1/user/-/activities.json',
         //?startTime=12%3A20&durationMillis=600000&date=2015-03-01&distance=1.5',
-      method: 'POST',
-      headers: {
-        'Authorization': 'Bearer ' + loadedToken.token.access_token,
-        'Content-Type': 'application/x-www-form-urlencoded',
-        'Content-Length': post_data.length
-      }*/
-    };
-    res.send('ok');
     var post_data = querystring.stringify({
       'activityName': 'test',
       'manualCalories': '100',
@@ -94,6 +83,17 @@ router.route('/fitbit/activities')
       'durationMillis': '1000',
       'date': '2015-10-08'
     });
+    var post_options = {
+      hostname: 'api.fitbit.com',
+      path: '1/user/-/activities.json',
+      method: 'POST',
+      headers: {
+        'Authorization': 'Bearer ' + loadedToken.token.access_token,
+        'Content-Type': 'application/x-www-form-urlencoded',
+        'Content-Length': post_data.length
+      }
+    };
+    res.send('ok');
     var post_req = https.request(options, function(fitbitRes) {
       var body = '';
       fitbitRes.on('data', function(d) {
