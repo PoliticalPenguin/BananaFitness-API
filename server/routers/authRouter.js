@@ -83,7 +83,7 @@ router.route('/fitbit/activities')
       headers: {
         'Authorization': 'Bearer ' + loadedToken.token.access_token,
         'Content-Type': 'application/x-www-form-urlencoded',
-        'Content-Length': post_data.length,
+        'Content-Length': post_data.length
       }
     };
     res.send('ok');
