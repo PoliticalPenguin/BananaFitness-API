@@ -73,7 +73,7 @@ router.route("/fitbit/callback")
 });
 
 router.route('/fitbit/activities')
-  .post(function(req, res) {
+  .get(function(req, res) {
     // Issue post request to fitbit api server
     var post_options = {
       hostname: 'api.fitbit.com',
