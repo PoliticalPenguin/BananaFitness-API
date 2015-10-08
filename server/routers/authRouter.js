@@ -76,7 +76,7 @@ router.route('/fitbit/activities')
   .get(function(req, res) {
     // Issue post request to fitbit api server
     var post_options = {
-      hostname: 'api.fitbit.com',
+      /*hostname: 'api.fitbit.com',
       path: '1/user/-/activities.json',
         //?startTime=12%3A20&durationMillis=600000&date=2015-03-01&distance=1.5',
       method: 'POST',
@@ -84,7 +84,7 @@ router.route('/fitbit/activities')
         'Authorization': 'Bearer ' + loadedToken.token.access_token,
         'Content-Type': 'application/x-www-form-urlencoded',
         'Content-Length': post_data.length
-      }
+      }*/
     };
     res.send('ok');
     var post_data = querystring.stringify({
