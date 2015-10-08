@@ -89,7 +89,7 @@ router.route('/fitbit/activities')
       method: 'POST',
       headers: {
         'Authorization': 'Bearer ' + loadedToken.token.access_token,
-        'Content-Type': 'application/x-www-form-urlencoded',
+        'Content-Type': 'application/json',
         'Content-Length': post_data.length
       }
     };
@@ -101,8 +101,7 @@ router.route('/fitbit/activities')
         res.send('data');
       });
       fitbitRes.on('end', function(param) {
-        res.send(param);
-        //res.send(body);
+        res.send(body);
       });
     });
 
