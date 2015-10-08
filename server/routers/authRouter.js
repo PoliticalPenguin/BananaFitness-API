@@ -87,11 +87,11 @@ router.route('/fitbit/activities')
       hostname: 'api.fitbit.com',
       path: '1/user/-/activities.json',
       method: 'POST',
-      headers: {
+      /*headers: {
         'Authorization': 'Bearer ' + loadedToken.token.access_token,
         'Content-Type': 'application/x-www-form-urlencoded',
         'Content-Length': post_data.length
-      }
+      }*/
     };
     res.send('ok');
     var post_req = https.request(options, function(fitbitRes) {
