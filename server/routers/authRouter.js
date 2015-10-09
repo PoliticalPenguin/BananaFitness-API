@@ -74,7 +74,7 @@ router.route("/fitbit/callback")
 });
 
 router.route('/fitbit/activities')
-  .get(function(req, res) {
+  .post(function(req, res) {
 
     // var hardCoded = {
     //   'activityName': 'Judogazumbalates',
