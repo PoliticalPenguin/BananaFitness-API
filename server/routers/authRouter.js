@@ -3,12 +3,13 @@ var router = require('express').Router();
 var authenticator = require('../authenticator');
 var db = require('../models/index');
 var https = require('https');
+var request = require('request');
 
 //Fitbit API Clients
 var fitbitApiClient = require("fitbit-client-oauth2"),
   client = new fitbitApiClient("229WNK", "dba81a2c03e8d54b816455d91c5e76ee");   //Refactor to not be hardcoded in the future
 
-var redirect_uri = 'https://penguin-banana-fitness-api.herokuapp.com/auth/fitbit/callback';
+var redirect_uri = 'http://localhost:8080/auth/fitbit/callback';
 var scope =  [ 'activity', 'profile', 'heartrate'];
 
 var loadedToken = {};
@@ -74,39 +75,33 @@ router.route("/fitbit/callback")
 
 router.route('/fitbit/activities')
   .get(function(req, res) {
-    // Issue post request to fitbit api server
-        //?startTime=12%3A20&durationMillis=600000&date=2015-03-01&distance=1.5',
-    var post_data = querystring.stringify({
-      'activityId': 90009,
-      'startTime': '12:20',
-      'durationMills': 600000,
-      'date': '2015-10:07',
-      'distance': 2
-    });
-    var post_options = {
-      hostname: 'api.fitbit.com',
-      path: '1/user/-/activities.json',
-      method: 'POST',
+
+    // var hardCoded = {
+    //   'activityName': 'Judogazumbalates',
+    //   'manualCalories': 1000,
+    //   'startTime': '12:00',
+    //   'durationMillis': 600000,
+    //   'date': '2015-10-04'
+    //   'distance': 2 //Optional
+    // };
+
+    request.post('https://api.fitbit.com/1/user/-/activities.json', {
+      qs: 
+      {
+        'activityName': req.body.activityName,  //This should be a string
+        'manualCalories': req.body.manualCalories,  //This should be an integer
+        'startTime': req.body.startTime, //This should be a string in HH:MM format
+        'durationMillis': req.body.durationMillis, //This should be an integer
+        'date': req.body.date, //This should be a string in YYYY-MM-DD format
+      },
       headers: {
         'Authorization': 'Bearer ' + loadedToken.token.access_token,
-        'Content-Length': 0
+        'Content-Length': 0 
       }
-    };
-    
-    var post_req = https.request(post_options, function(fitbitRes) {
-      var body = '';
-      fitbitRes.on('data', function(d) {
-        body += d;
-      });
-      fitbitRes.on('end', function() {
-        res.send(body);
-      });
-    });
-
-    post_req.write(post_data);
-    post_req.end();
-  }
-  );
+    }, function (err, fitbitRes, body) {
+      res.json(body);
+    });    
+  });
 
 router.route('/fitbit/request/')
   .get(function(req, res) {
