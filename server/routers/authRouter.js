@@ -9,7 +9,7 @@ var request = require('request');
 var fitbitApiClient = require("fitbit-client-oauth2"),
   client = new fitbitApiClient("229WNK", "dba81a2c03e8d54b816455d91c5e76ee");   //Refactor to not be hardcoded in the future
 
-var redirect_uri = 'http://localhost:8080/auth/fitbit/callback';
+var redirect_uri = 'http://penguin-banana-fitness-api.herokuapp.com/auth/fitbit/callback';
 var scope =  [ 'activity', 'profile', 'heartrate'];
 
 var loadedToken = {};
