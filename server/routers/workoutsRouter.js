@@ -35,7 +35,7 @@ router.route('/:userid')
         db.Workout.findAll({
           where: {
             user_id: user['id']
-          }, {order: '"updatedAt" DESC'}
+          }
         }).then(function (workouts) {
           if (workouts.length === 0) {
             res.json('There are no workouts for this user');
