@@ -5,7 +5,7 @@
     "password": "",
     "host": "localhost",
     "dialect": "postgres",
-    "allowedOrigin": "http://localhost:8100"
+    "allowedOrigin": "*"
   },
   "test": {
     "database": "covalent_fitness_test",
