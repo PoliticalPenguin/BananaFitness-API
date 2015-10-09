@@ -4,8 +4,7 @@
     "username": "",
     "password": "",
     "host": "localhost",
-    "dialect": "postgres",
-    "allowedOrigin": "*"
+    "dialect": "postgres"
   },
   "test": {
     "database": "covalent_fitness_test",
@@ -16,6 +15,5 @@
   },
   "production": {
     "database": "postgres://lavsrkyzytcnwv:KoIjN0AygMcigqoUNYo9hkYfr3@ec2-54-197-241-239.compute-1.amazonaws.com:5432/d3o1c9kpujnsir",
-    "allowedOrigin": "*"
   }
 }
