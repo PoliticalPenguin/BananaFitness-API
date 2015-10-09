@@ -88,8 +88,8 @@ app.use(function(req, res, next) {
     res.status(200);
     res.end();
   }
-  else
-    next();
+  // else
+  next();
 });
 //Cookie parser
 app.use(cookieParser('keyboard cat'));
