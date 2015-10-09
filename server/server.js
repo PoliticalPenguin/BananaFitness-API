@@ -88,7 +88,8 @@ app.use(function(req, res, next) {
     res.status(200);
     res.end();
   }
-  next();
+  else
+    next();
 });
 //Cookie parser
 app.use(cookieParser('keyboard cat'));
@@ -107,7 +108,7 @@ app.use(authenticator.initialize());
 app.use(authenticator.session());
 
 // Set our port
-var port = process.env.PORT || 8080;
+// var port = process.env.PORT || 8080;
 
 // ROUTES FOR OUR API
 // =============================================================================
@@ -123,18 +124,18 @@ var movesRouter = require('./routers/movesRouter');
 var followsRouter = require('./routers/followsRouter');
 
 // All of our routes will console log a status
-app.use(function (req, res, next) {
-  console.log('==========================================');
-  console.log(req.method + ': ' + req.url);
-  console.log(req.session);
-  next();
-});
+// app.use(function (req, res, next) {
+//   console.log('==========================================');
+//   console.log(req.method + ': ' + req.url);
+//   console.log(req.session);
+//   next();
+// });
 
 // Ideally, this route sends the index.html
 app.get('/', function (req, res) {
   // res.sendFile(__dirname + '/public/views/index.html');
   res.json({
-    message: 'Welcome to the Covalent Fitness API!'
+    message: 'Welcome to the Penguin Banana Fitness API!'
   });
 });
 
